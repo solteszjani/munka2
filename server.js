@@ -79,8 +79,8 @@ app.get("/api/me",auth,(req,res)=>res.json({id:req.user.id,email:req.user.email}
 
 app.get("/api/shifts",auth,async(req,res)=>{
  try{
-   const r=await pool.query("SELECT id,date,start_time AS start,end_time AS end,type,location,note FROM shifts WHERE user_id=$1 ORDER BY date,start_time",[req.user.id]);
-   res.json(r.rows.map(x=>({...x,date:String(x.date).slice(0,10),id:String(x.id)})));
+   const r=await pool.query("SELECT id,TO_CHAR(date,'YYYY-MM-DD') AS date,start_time AS start,end_time AS end,type,location,note FROM shifts WHERE user_id=$1 ORDER BY date,start_time",[req.user.id]);
+   res.json(r.rows.map(x=>({...x,date:String(x.date),id:String(x.id)})));
  }catch(e){console.error(e);res.status(500).json({error:"Nem sikerült betölteni a szolgálatokat"});}
 });
 
@@ -88,17 +88,17 @@ app.post("/api/shifts",auth,async(req,res)=>{
  try{
    const {date,start,end,type,location="",note=""}=req.body;
    if(!date||!start||!end||!type)return res.status(400).json({error:"Hiányzó kötelező adat"});
-   const r=await pool.query("INSERT INTO shifts(user_id,date,start_time,end_time,type,location,note) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id,date,start_time AS start,end_time AS end,type,location,note",[req.user.id,date,start,end,type,location,note]);
-   const x=r.rows[0];res.json({...x,id:String(x.id),date:String(x.date).slice(0,10)});
+   const r=await pool.query("INSERT INTO shifts(user_id,date,start_time,end_time,type,location,note) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING id,TO_CHAR(date,'YYYY-MM-DD') AS date,start_time AS start,end_time AS end,type,location,note",[req.user.id,date,start,end,type,location,note]);
+   const x=r.rows[0];res.json({...x,id:String(x.id),date:String(x.date)});
  }catch(e){console.error(e);res.status(500).json({error:"Nem sikerült menteni"});}
 });
 
 app.put("/api/shifts/:id",auth,async(req,res)=>{
  try{
    const {date,start,end,type,location="",note=""}=req.body;
-   const r=await pool.query("UPDATE shifts SET date=$1,start_time=$2,end_time=$3,type=$4,location=$5,note=$6,updated_at=NOW() WHERE id=$7 AND user_id=$8 RETURNING id,date,start_time AS start,end_time AS end,type,location,note",[date,start,end,type,location,note,req.params.id,req.user.id]);
+   const r=await pool.query("UPDATE shifts SET date=$1,start_time=$2,end_time=$3,type=$4,location=$5,note=$6,updated_at=NOW() WHERE id=$7 AND user_id=$8 RETURNING id,TO_CHAR(date,'YYYY-MM-DD') AS date,start_time AS start,end_time AS end,type,location,note",[date,start,end,type,location,note,req.params.id,req.user.id]);
    if(!r.rowCount)return res.status(404).json({error:"A szolgálat nem található"});
-   const x=r.rows[0];res.json({...x,id:String(x.id),date:String(x.date).slice(0,10)});
+   const x=r.rows[0];res.json({...x,id:String(x.id),date:String(x.date)});
  }catch(e){console.error(e);res.status(500).json({error:"Nem sikerült módosítani"});}
 });
 
