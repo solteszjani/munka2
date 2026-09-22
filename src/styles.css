@@ -89,3 +89,175 @@
 }
 
 .auth{min-height:100dvh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 20% 0,#dce9ff,#f5f7fb 45%,#eef2f7)}.authCard{width:min(430px,100%);background:#fffffff0;border:1px solid #e2e8f0;border-radius:28px;padding:34px;box-shadow:0 30px 90px #0f172a18;text-align:center}.authLogo{width:56px;height:56px;margin:0 auto 18px;border-radius:18px;background:#2563eb;color:#fff;display:grid;place-items:center;box-shadow:0 12px 30px #2563eb40}.authCard h1{font-size:36px;line-height:.98;letter-spacing:-.05em;margin:0 0 10px}.authCard h1 em{font-style:normal;color:#2563eb}.authCard>p{font-size:13px;color:#718096;margin-bottom:24px}.authCard form{text-align:left}.authCard label{display:block;font-size:11px;font-weight:800;color:#64748b;margin:12px 0}.authCard input{width:100%;margin-top:7px;padding:13px;border:1px solid #dbe3ec;border-radius:13px;background:#f8fafc;outline:0}.authBtn{width:100%;height:46px;justify-content:center;margin-top:7px}.linkBtn{border:0;background:none;color:#2563eb;font-weight:700;margin-top:16px;cursor:pointer}.privacy{display:flex;justify-content:center;align-items:center;gap:5px;color:#94a3b8;margin-top:20px}.error{background:#fee2e2;color:#b91c1c;border-radius:11px;padding:10px;font-size:11px}.topError{margin-bottom:13px;display:flex;justify-content:space-between}.topError button{border:0;background:none;color:inherit;font-size:18px}.loading{min-height:100vh;display:grid;place-items:center;font-family:system-ui;color:#64748b}.sync{color:#64748b;display:grid;place-items:center}.sync svg{width:17px}.spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.logout{color:#ef4444!important}@media(max-width:700px){.auth{padding:15px}.authCard{padding:27px 21px;border-radius:24px}.authCard h1{font-size:32px}.sync{display:none}}
+
+/* =========================================================
+   FINAL MOBILE UI - native-like phone layout
+   ========================================================= */
+@media (max-width: 700px) {
+  html, body, #root { width: 100%; min-width: 0; overflow-x: hidden; }
+  body { -webkit-text-size-adjust: 100%; }
+  button, input, select, textarea { font-family: inherit; }
+
+  .app { min-height: 100dvh; padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .nav {
+    height: 62px;
+    padding: 0 14px;
+    padding-top: env(safe-area-inset-top);
+    height: calc(62px + env(safe-area-inset-top));
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 1px 0 rgba(15,23,42,.05);
+  }
+  .dark .nav { background: rgba(8,14,24,.96); }
+  .brand { gap: 9px; }
+  .brandIcon { width: 36px; height: 36px; border-radius: 11px; }
+  .brandIcon svg { width: 19px; }
+  .brand b { font-size: 14px; line-height: 1.1; }
+  .brand span { font-size: 9px; }
+  .navRight { gap: 6px; }
+  .navRight .sync { display: none; }
+  .round { width: 36px; height: 36px; border-radius: 11px; }
+  .round svg { width: 17px; }
+  .navRight .logout { display: grid; }
+  .primary { width: 36px; height: 36px; padding: 0; border-radius: 11px; justify-content: center; }
+  .primary svg { width: 18px; }
+  .primary span { display: none; }
+
+  main { width: 100%; max-width: none; padding: 18px 12px 18px; }
+  .welcome { margin: 0 0 14px; display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+  .kicker { font-size: 8px; letter-spacing: .14em; }
+  .welcome h1 { font-size: 31px; line-height: 1.02; letter-spacing: -.045em; margin: 5px 0 7px; }
+  .welcome p { font-size: 11px; line-height: 1.45; margin: 0; color: #718096; }
+  .nextCard { width: 100%; border-radius: 18px; padding: 14px 15px; box-shadow: 0 10px 30px rgba(15,23,42,.16); }
+  .nextCard span { font-size: 8px; }
+  .nextCard strong { font-size: 17px; margin: 6px 0 1px; }
+  .nextCard b { font-size: 14px; }
+  .nextCard small { font-size: 10px; margin-top: 5px; }
+
+  .topError { font-size: 10px; margin-bottom: 12px; }
+
+  /* horizontally scrollable KPI cards instead of three cramped columns */
+  .stats {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    margin: 0 -12px 13px;
+    padding: 2px 12px 5px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .stats::-webkit-scrollbar { display: none; }
+  .stat {
+    flex: 0 0 142px;
+    min-height: 105px;
+    padding: 12px;
+    border-radius: 17px;
+    display: block;
+    scroll-snap-align: start;
+  }
+  .statIcon { width: 31px; height: 31px; border-radius: 10px; margin-bottom: 9px; }
+  .statIcon svg { width: 15px; height: 15px; }
+  .stat span { font-size: 9px; }
+  .stat strong { font-size: 16px; margin: 3px 0; }
+  .stat small { font-size: 8px; line-height: 1.2; }
+
+  .workspace { display: flex; flex-direction: column; gap: 12px; }
+  .calendar, .agenda { width: 100%; padding: 15px; border-radius: 19px; }
+  .calendar { order: 1; }
+  .agenda { order: 2; }
+  .sectionHead h2, .agendaHead h2 { font-size: 18px; margin: 4px 0 1px; }
+  .sectionHead span, .agendaHead span { font-size: 8px; }
+  .arrows { gap: 5px; }
+  .arrows button, .miniAdd { width: 38px; height: 38px; border-radius: 11px; }
+  .week { margin: 18px 0 6px; gap: 2px; }
+  .week span { font-size: 9px; }
+  .days { gap: 2px; }
+  .days button { height: 48px; border-radius: 12px; }
+  .days button b { font-size: 12px; }
+  .days button.selected { box-shadow: 0 6px 14px rgba(37,99,235,.28); }
+  .days i { width: 5px; height: 5px; bottom: 6px; }
+
+  .agendaBody { margin-top: 13px; }
+  .empty { min-height: 205px; border-radius: 16px; padding: 18px; }
+  .empty div { width: 46px; height: 46px; border-radius: 15px; }
+  .empty b { font-size: 13px; }
+  .empty span { font-size: 10px; line-height: 1.35; }
+  .empty button { font-size: 11px; min-height: 40px; padding: 9px 13px; }
+
+  .shift { border-radius: 16px; margin-bottom: 9px; }
+  .stripe { width: 4px; }
+  .shiftMain { padding: 12px 11px; min-width: 0; }
+  .shiftLine { align-items: center; gap: 8px; }
+  .badge { font-size: 9px; padding: 5px 7px; max-width: 65%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .shiftLine small { font-size: 9px; white-space: nowrap; }
+  .shift h3 { font-size: 18px; margin: 7px 0 6px; }
+  .shift p { font-size: 10px; line-height: 1.35; }
+  .shift p svg { width: 13px; flex: 0 0 auto; }
+  .shiftButtons { flex: 0 0 42px; }
+  .shiftButtons button { width: 42px; }
+  .shiftButtons svg { width: 16px; }
+
+  /* Bottom navigation with iPhone safe-area support */
+  .mobileBar {
+    left: 10px;
+    right: 10px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
+    height: 60px;
+    padding: 4px 18px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.96);
+    border: 1px solid rgba(148,163,184,.18);
+    box-shadow: 0 12px 35px rgba(15,23,42,.20);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .dark .mobileBar { background: rgba(14,24,39,.97); }
+  .mobileBar button { min-width: 54px; height: 50px; justify-content: center; gap: 2px; font-size: 9px; }
+  .mobileBar button svg { width: 19px; height: 19px; }
+  .mobileBar .fab { width: 46px; height: 46px; min-width: 46px; border-radius: 15px; }
+  .mobileBar .fab svg { width: 22px; height: 22px; }
+
+  /* Add/edit form becomes a bottom sheet, much easier to use with one hand */
+  .modalBg { align-items: flex-end; padding: 0; }
+  .editor {
+    width: 100%;
+    max-height: 92dvh;
+    overflow-y: auto;
+    border-radius: 24px 24px 0 0;
+    padding: 19px 16px calc(20px + env(safe-area-inset-bottom));
+    box-shadow: 0 -20px 70px rgba(0,0,0,.30);
+  }
+  .editorTop { margin-bottom: 14px; }
+  .editorTop h2 { font-size: 21px; margin-top: 4px; }
+  .editorTop span { font-size: 8px; }
+  .close { width: 38px; height: 38px; border-radius: 11px; }
+  .formGrid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .formGrid label { font-size: 10px; }
+  .formGrid .full { grid-column: 1 / -1; }
+  .formGrid input, .formGrid select, .formGrid textarea {
+    font-size: 16px; /* prevents iOS Safari input zoom */
+    min-height: 45px;
+    padding: 10px 11px;
+    margin-top: 6px;
+    border-radius: 11px;
+  }
+  .formGrid textarea { min-height: 85px; }
+  .editorBottom { position: sticky; bottom: -20px; margin: 16px -16px -20px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: inherit; border-top: 1px solid rgba(148,163,184,.15); }
+  .cancel, .save, .delete { min-height: 42px; padding: 9px 12px; font-size: 11px; }
+
+  /* Login page */
+  .auth { min-height: 100dvh; padding: 15px; padding-bottom: calc(15px + env(safe-area-inset-bottom)); }
+  .authCard { width: 100%; padding: 26px 20px; border-radius: 23px; }
+  .authCard h1 { font-size: 31px; }
+  .authCard input { font-size: 16px; min-height: 46px; }
+  .authBtn { min-height: 47px; }
+}
+
+@media (max-width: 390px) {
+  main { padding-left: 10px; padding-right: 10px; }
+  .stats { margin-left: -10px; margin-right: -10px; padding-left: 10px; padding-right: 10px; }
+  .stat { flex-basis: 136px; }
+  .calendar, .agenda { padding: 13px; }
+  .days button { height: 45px; }
+  .days button b { font-size: 11px; }
+}
